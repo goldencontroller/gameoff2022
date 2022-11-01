@@ -40,17 +40,35 @@ class Level extends Phaser.Scene {
             
             buildingStartPos += buildingWidth + gapWidth;
         }
+        var levelLength = buildingStartPos * 32;
         
         this.player = this.physics.add.sprite(69, 0, "rakesh");
         this.player.setGravityY(1200);
         this.physics.add.collider(this.player, this.bricks);
         
+        this.physics.world.setBounds(0, 0, levelLength, 540);
+        this.cameras.main.setBounds(0, 0, levelLength, 540);
+        this.cameras.main.startFollow(this.player);
         
+        this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
     }
 
     update() {
-        
+        /*
+        // for testing camera only
+        if (this.cursors.left.isDown) {
+            this.player.body.x-=10;
+        }
+        if (this.cursors.right.isDown) {
+            this.player.body.x+=10;
+        }
+        if (this.cursors.up.isDown) {
+            this.player.body.y-=10;
+        }
+        if (this.cursors.down.isDown) {
+            this.player.body.y+=10;
+        }*/
     }
 
 }
