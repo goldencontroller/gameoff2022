@@ -28,7 +28,7 @@ class Level extends Phaser.Scene {
             
             for (var col = 0; col < buildingWidth; col++) {
                 for (var row = 0; row < buildingHeight; row++) {
-                    var brick = this.bricks.create((buildingStartPos + col) * 32, row * 32, "world1brick");
+                    var brick = this.bricks.create((buildingStartPos + col) * 32, (540/32 - row) * 32, "world1brick");
                     brick.setScale(32 / 256);
                 }
             }
