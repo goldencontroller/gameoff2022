@@ -11,7 +11,6 @@ class Level extends Phaser.Scene {
     create() {
         var graphics = this.add.graphics();
         graphics.fillGradientStyle(0x00d8ff, 0x00d8ff, 0x003ebd, 0x003ebd, 1);
-        graphics.fillRect(0, 0, 960, 540);
         
         var levelStats = {
             stdBuildingWidth: 10,
@@ -41,6 +40,8 @@ class Level extends Phaser.Scene {
             buildingStartPos += buildingWidth + gapWidth;
         }
         var levelLength = buildingStartPos * 32;
+        
+        graphics.fillRect(0, 0, levelLength, 540);
         
         this.player = this.physics.add.sprite(69, 0, "rakesh");
         this.player.setGravityY(1200);
