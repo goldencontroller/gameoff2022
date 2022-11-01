@@ -23,7 +23,7 @@ class Level extends Phaser.Scene {
             buildingHeightDev: 2,
         };
         
-        this.bricks = this.physics.add.group();
+        this.bricks = this.physics.add.staticGroup();
         var buildingStartPos = 2;
         for (var i = 0; i < levelStats.numBuildings; i++) {
             var buildingWidth = levelStats.stdBuildingWidth + (2 * Math.random() - 1) * levelStats.buildingWidthDev;
@@ -34,11 +34,16 @@ class Level extends Phaser.Scene {
                 for (var row = 0; row < buildingHeight; row++) {
                     var brick = this.bricks.create((buildingStartPos + col) * 32, (540/32 - row) * 32, "world1brick");
                     brick.setScale(32 / 256);
+                    brick.refreshBody();
                 }
             }
             
             buildingStartPos += buildingWidth + gapWidth;
         }
+        
+        this.player = this.physics.add.sprite(69, 0, "rakesh");
+        this.player.setGravityY(1200);
+        this.physics.add.collider(this.player, this.bricks);
         
         
         
