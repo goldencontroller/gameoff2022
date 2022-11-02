@@ -25,9 +25,9 @@ class Level extends Phaser.Scene {
         this.bricks = this.physics.add.staticGroup();
         var buildingStartPos = 2;
         for (var i = 0; i < levelStats.numBuildings; i++) {
-            var buildingWidth = levelStats.stdBuildingWidth + (2 * Math.random() - 1) * levelStats.buildingWidthDev;
-            var buildingHeight = levelStats.stdBuildingHeight + (2 * Math.random() - 1) * levelStats.buildingHeightDev;
-            var gapWidth = levelStats.stdGapWidth + (2 * Math.random() - 1) * levelStats.gapWidthDev;
+            var buildingWidth = levelStats.stdBuildingWidth + Math.round((2 * Math.random() - 1) * levelStats.buildingWidthDev);
+            var buildingHeight = levelStats.stdBuildingHeight + Math.round((2 * Math.random() - 1) * levelStats.buildingHeightDev);
+            var gapWidth = levelStats.stdGapWidth + Math.round((2 * Math.random() - 1) * levelStats.gapWidthDev);
             
             for (var col = 0; col < buildingWidth; col++) {
                 for (var row = 0; row < buildingHeight; row++) {
@@ -56,7 +56,7 @@ class Level extends Phaser.Scene {
     }
 
     update() {
-        /*
+        
         // for testing camera only
         if (this.cursors.left.isDown) {
             this.player.body.x-=10;
@@ -69,7 +69,7 @@ class Level extends Phaser.Scene {
         }
         if (this.cursors.down.isDown) {
             this.player.body.y+=10;
-        }*/
+        }
     }
 
 }
