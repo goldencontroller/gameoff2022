@@ -51,12 +51,17 @@ class Level extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, levelLength, 540);
         this.cameras.main.startFollow(this.player);
         
+        this.projectiles = this.physics.add.group();
+        
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
+        
+        this.clicka = this.input.activePointer;
+        this.canClick = true;
         
     }
 
     update() {
-        
+        /*
         // for testing camera only
         if (this.cursors.left.isDown) {
             this.player.body.x-=10;
@@ -69,6 +74,14 @@ class Level extends Phaser.Scene {
         }
         if (this.cursors.down.isDown) {
             this.player.body.y+=10;
+        }*/
+        if (this.clicka.isDown && this.canClick) {
+            this.canClick = false;
+            var ball = this.projectiles.create(this.player.x, this.player.y);
+            ball.rotation = Phaser.Math.Angle.Between(ball.x, ball.y, this.input.activePointer.x, this.input.activePointer.y);
+        }
+        else {
+            this.canClick = true;
         }
     }
 
