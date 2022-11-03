@@ -56,6 +56,13 @@ class Level extends Phaser.Scene {
         
         this.projectiles = this.physics.add.group();
         
+        this.garbageDump = [];
+        var garbageDump = this.garbageDump;
+        this.physics.add.overlap(this.projectiles, this.bricks, function(brick, projectile) {
+            garbageDump.push(brick);
+            garbageDump.push(projectile);
+        }, null, this);
+        
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
         this.clicka = this.input.activePointer;
@@ -94,14 +101,16 @@ class Level extends Phaser.Scene {
             this.canClick = true;
         }
         
-        var garbageDump = [];
+        var garbageDump = this.garbageDump;
         this.projectiles.children.iterate(function(ball) {
             if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > this.levelLength) {
                 garbageDump.push(ball);
             }
         }.bind(this));
         
-        garbageDump.forEach(function(spri) { spri.destroy(); });
+        while (garbageDump.length > 0) {
+            garbageDump.pop().destroy();
+        }
     }
 
 }
