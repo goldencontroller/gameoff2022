@@ -45,6 +45,8 @@ class Level extends Phaser.Scene {
         
         this.player = this.physics.add.sprite(69, 0, "rakesh");
         this.player.setGravityY(1200);
+        this.player.setDragX(333);
+        this.player.setDragY(333);
         this.physics.add.collider(this.player, this.bricks);
         
         this.physics.world.setBounds(0, 0, levelLength, 540);
@@ -77,10 +79,12 @@ class Level extends Phaser.Scene {
         }*/
         if (this.clicka.isDown && this.canClick) {
             this.canClick = false;
-            var ball = this.projectiles.create(this.player.x, this.player.y);
+            var ball = this.projectiles.create(this.player.x, this.player.y, "ball");
             ball.rotation = Phaser.Math.Angle.Between(ball.x, ball.y, this.input.activePointer.x, this.input.activePointer.y);
             ball.setVelocityX(Math.cos(ball.rotation) * 1000);
             ball.setVelocityY(Math.sin(ball.rotation) * 1000);
+            this.player.setVelocityX(ball.body.velocity.x * -0.3);
+            this.player.setVelocityY(ball.body.velocity.y * -0.3);
         }
         else if (!this.clicka.isDown) {
             this.canClick = true;
