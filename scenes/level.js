@@ -56,7 +56,7 @@ class Level extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
         this.clicka = this.input.activePointer;
-        this.canClick = true;
+        this.canClick = false;
         
     }
 
@@ -80,7 +80,7 @@ class Level extends Phaser.Scene {
             var ball = this.projectiles.create(this.player.x, this.player.y);
             ball.rotation = Phaser.Math.Angle.Between(ball.x, ball.y, this.input.activePointer.x, this.input.activePointer.y);
         }
-        else {
+        else if (!this.clicka.isDown) {
             this.canClick = true;
         }
     }
