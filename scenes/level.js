@@ -40,6 +40,7 @@ class Level extends Phaser.Scene {
             buildingStartPos += buildingWidth + gapWidth;
         }
         var levelLength = buildingStartPos * 32;
+        this.levelLength = levelLength;
         
         graphics.fillRect(0, 0, levelLength, 540);
         
@@ -77,6 +78,7 @@ class Level extends Phaser.Scene {
         if (this.cursors.down.isDown) {
             this.player.body.y+=10;
         }*/
+        
         var relClickX = this.clicka.x + this.cameras.main.scrollX;
         
         if (this.clicka.isDown && this.canClick) {
@@ -94,10 +96,10 @@ class Level extends Phaser.Scene {
         
         var garbageDump = [];
         this.projectiles.children.iterate(function(ball) {
-            if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > 696969) {
+            if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > this.levelLength) {
                 garbageDump.push(ball);
             }
-        });
+        }.bind(this));
         
         garbageDump.forEach(function(spri) { spri.destroy(); });
     }
