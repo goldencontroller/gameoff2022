@@ -81,7 +81,7 @@ class Level extends Phaser.Scene {
         
         var relClickX = this.clicka.x + this.cameras.main.scrollX;
         
-        if (this.clicka.isDown && this.canClick) {
+        if (this.clicka.isDown && this.canClick && this.player.y > 21) {
             this.canClick = false;
             var ball = this.projectiles.create(this.player.x, this.player.y, "ball");
             ball.rotation = Math.atan2(this.clicka.y - this.player.y, relClickX - this.player.x);
