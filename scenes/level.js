@@ -79,10 +79,21 @@ class Level extends Phaser.Scene {
             this.canClick = false;
             var ball = this.projectiles.create(this.player.x, this.player.y);
             ball.rotation = Phaser.Math.Angle.Between(ball.x, ball.y, this.input.activePointer.x, this.input.activePointer.y);
+            ball.setVelocityX(Math.cos(ball.rotation) * 1000);
+            ball.setVelocityY(Math.sin(ball.rotation) * 1000);
         }
         else if (!this.clicka.isDown) {
             this.canClick = true;
         }
+        
+        var garbageDump = [];
+        this.projectiles.children.iterate(function(ball) {
+            if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > 696969) {
+                garbageDump.push(ball);
+            }
+        });
+        
+        garbageDump.forEach(function(spri) { spri.destroy(); });
     }
 
 }
