@@ -77,10 +77,12 @@ class Level extends Phaser.Scene {
         if (this.cursors.down.isDown) {
             this.player.body.y+=10;
         }*/
+        var relClickX = this.clicka.x + this.cameras.main.scrollX;
+        
         if (this.clicka.isDown && this.canClick) {
             this.canClick = false;
             var ball = this.projectiles.create(this.player.x, this.player.y, "ball");
-            ball.rotation = Math.atan2(this.input.activePointer.y - this.player.y, this.input.activePointer.x - this.player.x);
+            ball.rotation = Math.atan2(this.clicka.y - this.player.y, relClickX - this.player.x);
             ball.setVelocityX(Math.cos(ball.rotation) * 1000);
             ball.setVelocityY(Math.sin(ball.rotation) * 1000);
             this.player.setVelocityX(ball.body.velocity.x * -0.3);
