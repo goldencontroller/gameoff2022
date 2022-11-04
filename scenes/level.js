@@ -44,7 +44,7 @@ class Level extends Phaser.Scene {
         
         graphics.fillRect(0, 0, levelLength, 540);
         
-        this.player = this.physics.add.sprite(69, 0, "rakesh");
+        this.player = this.physics.add.sprite(69, -69, "rakesh");
         this.player.setGravityY(1200);
         this.player.setDragX(333);
         this.player.setDragY(333);
