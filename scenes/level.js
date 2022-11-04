@@ -130,7 +130,7 @@ class Level extends Phaser.Scene {
             if (Math.abs(enemy.x - this.player.x) < 456) {
                 if (this.internalClock % 34 == 0) {
                     var ball = this.projectiles.create(enemy.x, enemy.y, "ball");
-                    ball.rotation = Math.atan2(this.player.y - enemy.y, this.player.x - enemy.x);
+                    ball.rotation = Math.atan2((this.player.y - 32) - enemy.y, this.player.x - enemy.x);
                     ball.setVelocityX(Math.cos(ball.rotation) * 1000);
                     ball.setVelocityY(Math.sin(ball.rotation) * 1000);
                     ball.doNotHurtEnemies = true;
