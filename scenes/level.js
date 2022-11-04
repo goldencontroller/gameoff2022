@@ -72,14 +72,18 @@ class Level extends Phaser.Scene {
             this.garbageDump.push(projectile);
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.sniperEnemies, function(projectile, enemy) {
-            this.garbageDump.push(projectile);
-            this.garbageDump.push(enemy);
+            if (!projectile.doNotHurtEnemies) {
+                this.garbageDump.push(projectile);
+                this.garbageDump.push(enemy);
+            }
         }.bind(this), null, this);
         
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
         this.clicka = this.input.activePointer;
         this.canClick = false;
+        
+        this.internalClock = 0;
         
     }
 
@@ -98,6 +102,8 @@ class Level extends Phaser.Scene {
         if (this.cursors.down.isDown) {
             this.player.body.y+=10;
         }*/
+        
+        this.internalClock++;
         
         var relClickX = this.clicka.x + this.cameras.main.scrollX;
         
@@ -118,6 +124,17 @@ class Level extends Phaser.Scene {
         this.projectiles.children.iterate(function(ball) {
             if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > this.levelLength) {
                 garbageDump.push(ball);
+            }
+        }.bind(this));
+        this.sniperEnemies.children.iterate(function(enemy) {
+            if (Math.abs(enemy.x - this.player.x) < 456) {
+                if (this.internalClock % 34 == 0) {
+                    var ball = this.projectiles.create(enemy.x, enemy.y, "ball");
+                    ball.rotation = Math.atan2(this.player.y - enemy.y, this.player.x - enemy.x);
+                    ball.setVelocityX(Math.cos(ball.rotation) * 1000);
+                    ball.setVelocityY(Math.sin(ball.rotation) * 1000);
+                    ball.doNotHurtEnemies = true;
+                }
             }
         }.bind(this));
         
