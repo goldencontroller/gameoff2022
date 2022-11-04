@@ -71,6 +71,10 @@ class Level extends Phaser.Scene {
             this.garbageDump.push(brick);
             this.garbageDump.push(projectile);
         }.bind(this), null, this);
+        this.physics.add.overlap(this.projectiles, this.sniperEnemies, function(projectile, enemy) {
+            this.garbageDump.push(projectile);
+            this.garbageDump.push(enemy);
+        }.bind(this), null, this);
         
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
