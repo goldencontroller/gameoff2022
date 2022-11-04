@@ -6,6 +6,7 @@ class Level extends Phaser.Scene {
 
     preload() {
         this.load.image("world1brick", "assets/image/world1brick.png");
+        this.load.image("ball", "assets/image/round.png");
     }
 
     create() {
