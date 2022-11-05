@@ -17,3 +17,9 @@ var game = new Phaser.Game({
     scene: [Level],
     pixelArt: true
 });
+
+game.levelOn = 1;
+game.scoreStats = {
+    kills: 0,
+    propertyDamage: 0
+};

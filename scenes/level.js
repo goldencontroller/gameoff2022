@@ -51,6 +51,8 @@ class Level extends Phaser.Scene {
         var levelLength = buildingStartPos * 32;
         this.levelLength = levelLength;
         
+        this.portal = this.physics.add.image(levelLength - (gapWidth + 2) * 32, 540 - (buildingHeight + 2) * 32, "portal");
+        
         graphics.fillRect(0, 0, levelLength, 540);
         
         this.player = this.physics.add.sprite(69, -69, "rakesh");
@@ -66,14 +68,16 @@ class Level extends Phaser.Scene {
         this.projectiles = this.physics.add.group();
         
         this.garbageDump = [];
-        this.physics.add.overlap(this.projectiles, this.bricks, function(brick, projectile) {
+        this.physics.add.overlap(this.projectiles, this.bricks, function(projectile, brick) {
             this.garbageDump.push(brick);
             this.garbageDump.push(projectile);
+            if (!projectile.doNotHurtEnemies) game.scoreStats.propertyDamage += 690;
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.sniperEnemies, function(projectile, enemy) {
             if (!projectile.doNotHurtEnemies) {
                 this.garbageDump.push(projectile);
                 this.garbageDump.push(enemy);
+                game.scoreStats.kills++;
             }
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.player, function(player, projectile) {
@@ -82,6 +86,10 @@ class Level extends Phaser.Scene {
                 this.player.setVelocityY(projectile.body.velocity.y * 0.69);
                 this.garbageDump.push(projectile);
             }
+        }.bind(this), null, this);
+        
+        this.physics.add.overlap(this.portal, this.player, function(player, portal) {
+            this.scene.start("transition");
         }.bind(this), null, this);
         
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
