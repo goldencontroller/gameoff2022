@@ -155,6 +155,8 @@ class Level extends Phaser.Scene {
         while (garbageDump.length > 0) {
             garbageDump.pop().destroy();
         }
+        
+        this.portal.rotation = this.internalClock / 9;
     }
 
 }
