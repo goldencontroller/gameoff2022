@@ -76,6 +76,13 @@ class Level extends Phaser.Scene {
                 this.garbageDump.push(enemy);
             }
         }.bind(this), null, this);
+        this.physics.add.overlap(this.projectiles, this.player, function(player, projectile) {
+            if (projectile.doNotHurtEnemies) {
+                this.player.setVelocityX(projectile.body.velocity.x);
+                this.player.setVelocityY(projectile.body.velocity.y);
+                this.garbageDump.push(projectile);
+            }
+        }.bind(this), null, this);
         
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
