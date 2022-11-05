@@ -25,7 +25,9 @@ class Level extends Phaser.Scene {
         
         this.bricks = this.physics.add.staticGroup();
         this.sniperEnemies = this.physics.add.group();
+        this.patrolEnemies = this.physics.add.group();
         this.physics.add.collider(this.bricks, this.sniperEnemies);
+        this.physics.add.collider(this.bricks, this.patrolEnemies);
         var buildingStartPos = 2;
         for (var i = 0; i < levelStats.numBuildings; i++) {
             var buildingWidth = levelStats.stdBuildingWidth + Math.round((2 * Math.random() - 1) * levelStats.buildingWidthDev);
@@ -39,9 +41,15 @@ class Level extends Phaser.Scene {
                 
                 if (i > 0) {
                     var rN = Math.random();
-                    if (rN < 0.210) {
+                    if (rN < 0.12) {
                         var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
                         sniperEnemy.setGravityY(1200);
+                    }
+                    else if (rN < 0.21) {
+                        if (col > 0 && col < buildingWidth - 1) {
+                            var patrolEnemy = this.patrolEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
+                            patrolEnemy.setGravityY(1200);
+                        }
                     }
                 }
             }
@@ -80,12 +88,22 @@ class Level extends Phaser.Scene {
                 game.scoreStats.kills++;
             }
         }.bind(this), null, this);
+        this.physics.add.overlap(this.projectiles, this.patrolEnemies, function(projectile, enemy) {
+            if (!projectile.doNotHurtEnemies) {
+                this.garbageDump.push(projectile);
+                this.garbageDump.push(enemy);
+                game.scoreStats.kills++;
+            }
+        }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.player, function(player, projectile) {
             if (projectile.doNotHurtEnemies) {
                 this.player.setVelocityX(projectile.body.velocity.x * 0.69);
                 this.player.setVelocityY(projectile.body.velocity.y * 0.69);
                 this.garbageDump.push(projectile);
             }
+        }.bind(this), null, this);
+        this.physics.add.overlap(this.patrolEnemies, this.player, function(player, enemy) {
+            player.setVelocityX(enemy.body.velocity.x * 20);
         }.bind(this), null, this);
         
         this.physics.add.overlap(this.portal, this.player, function(player, portal) {
@@ -150,6 +168,9 @@ class Level extends Phaser.Scene {
                     ball.doNotHurtEnemies = true;
                 }
             }
+        }.bind(this));
+        this.patrolEnemies.children.iterate(function(enemy) {
+            enemy.setVelocityX(Math.cos(this.internalClock / 16) * 96);
         }.bind(this));
         
         while (garbageDump.length > 0) {
