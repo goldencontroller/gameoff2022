@@ -178,6 +178,8 @@ class Level extends Phaser.Scene {
         }
         
         this.portal.rotation = this.internalClock / 9;
+        
+        if (this.player.y > 3690) this.scene.start("game-over");
     }
 
 }

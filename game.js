@@ -14,7 +14,7 @@ var game = new Phaser.Game({
         target: 60,
         forceSetTimeOut: true
     },
-    scene: [Level, Transition],
+    scene: [Level, Transition, GameOver],
     pixelArt: true
 });
 
