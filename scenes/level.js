@@ -23,6 +23,29 @@ class Level extends Phaser.Scene {
             buildingHeightDev: 2,
         };
         
+        switch (Math.floor((game.levelOn - 1) / 3) + 1) {
+            case 2:
+                levelStats.stdBuildingWidth = 6;
+                levelStats.buildingWidthDev = 4;
+                levelStats.numBuildings = 15;
+                levelStats.stdGapWidth = 5;
+                levelStats.gapWidthDev = 2;
+                levelStats.stdBuildingHeight = 6;
+                levelStats.buildingHeightDev = 4;
+                graphics.fillGradientStyle(0xc23400, 0xc23400, 0xcaab3d, 0xcaab3d, 1);
+                break;
+            case 3:
+                levelStats.stdBuildingWidth = 7;
+                levelStats.buildingWidthDev = 6;
+                levelStats.numBuildings = 18;
+                levelStats.stdGapWidth = 7;
+                levelStats.gapWidthDev = 4;
+                levelStats.stdBuildingHeight = 9;
+                levelStats.buildingHeightDev = 6;
+                graphics.fillGradientStyle(0x003c67, 0x003c67, 0x030030, 0x030030, 1);
+                break;
+        }
+        
         this.bricks = this.physics.add.staticGroup();
         this.sniperEnemies = this.physics.add.group();
         this.patrolEnemies = this.physics.add.group();
