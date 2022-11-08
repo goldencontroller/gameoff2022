@@ -25,8 +25,8 @@ class Level extends Phaser.Scene {
             stdBuildingHeight: 5,
             buildingHeightDev: 2,
             entityWeights: {
-                sniperEnemy: 0.12,
-                patrolEnemy: 0.21,
+                sniperEnemy: 0.16,
+                patrolEnemy: 0.24,
             },
         };
         
@@ -39,8 +39,8 @@ class Level extends Phaser.Scene {
                 levelStats.gapWidthDev = 2;
                 levelStats.stdBuildingHeight = 6;
                 levelStats.buildingHeightDev = 4;
-                levelStats.entityWeights.sniperEnemy = 0.18;
-                levelStats.entityWeights.patrolEnemy = 0.25;
+                levelStats.entityWeights.sniperEnemy = 0.27;
+                levelStats.entityWeights.patrolEnemy = 0.34;
                 graphics.fillGradientStyle(0xc23400, 0xc23400, 0xcaab3d, 0xcaab3d, 1);
                 break;
             case 3:
@@ -51,8 +51,8 @@ class Level extends Phaser.Scene {
                 levelStats.gapWidthDev = 4;
                 levelStats.stdBuildingHeight = 9;
                 levelStats.buildingHeightDev = 6;
-                levelStats.entityWeights.sniperEnemy = 0.28;
-                levelStats.entityWeights.patrolEnemy = 0.34;
+                levelStats.entityWeights.sniperEnemy = 0.69;
+                levelStats.entityWeights.patrolEnemy = 0.81;
                 graphics.fillGradientStyle(0x003c67, 0x003c67, 0x030030, 0x030030, 1);
                 break;
         }
