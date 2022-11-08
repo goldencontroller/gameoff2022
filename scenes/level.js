@@ -21,6 +21,10 @@ class Level extends Phaser.Scene {
             gapWidthDev: 1,
             stdBuildingHeight: 5,
             buildingHeightDev: 2,
+            entityWeights: {
+                sniperEnemy: 0.12,
+                patrolEnemy: 0.21,
+            },
         };
         
         switch (Math.floor((game.levelOn - 1) / 3) + 1) {
@@ -32,6 +36,8 @@ class Level extends Phaser.Scene {
                 levelStats.gapWidthDev = 2;
                 levelStats.stdBuildingHeight = 6;
                 levelStats.buildingHeightDev = 4;
+                levelStats.entityWeights.sniperEnemy = 0.18;
+                levelStats.entityWeights.patrolEnemy = 0.25;
                 graphics.fillGradientStyle(0xc23400, 0xc23400, 0xcaab3d, 0xcaab3d, 1);
                 break;
             case 3:
@@ -42,6 +48,8 @@ class Level extends Phaser.Scene {
                 levelStats.gapWidthDev = 4;
                 levelStats.stdBuildingHeight = 9;
                 levelStats.buildingHeightDev = 6;
+                levelStats.entityWeights.sniperEnemy = 0.28;
+                levelStats.entityWeights.patrolEnemy = 0.34;
                 graphics.fillGradientStyle(0x003c67, 0x003c67, 0x030030, 0x030030, 1);
                 break;
         }
@@ -64,11 +72,11 @@ class Level extends Phaser.Scene {
                 
                 if (i > 0) {
                     var rN = Math.random();
-                    if (rN < 0.12) {
+                    if (rN < levelStats.entityWeights.sniperEnemy) {
                         var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
                         sniperEnemy.setGravityY(1200);
                     }
-                    else if (rN < 0.21) {
+                    else if (rN < levelStats.entityWeights.patrolEnemy) {
                         if (col > 0 && col < buildingWidth - 1) {
                             var patrolEnemy = this.patrolEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
                             patrolEnemy.setGravityY(1200);
