@@ -7,6 +7,9 @@ class Level extends Phaser.Scene {
     preload() {
         this.load.image("world1brick", "assets/image/world1brick.png");
         this.load.image("ball", "assets/image/round.png");
+        this.load.image("rakesh", "assets/image/rameshravi.png");
+        this.load.image("normalBaddie", "assets/image/badbean.png");
+
     }
 
     create() {
@@ -73,12 +76,12 @@ class Level extends Phaser.Scene {
                 if (i > 0) {
                     var rN = Math.random();
                     if (rN < levelStats.entityWeights.sniperEnemy) {
-                        var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
+                        var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32 - 15, "normalBaddie");
                         sniperEnemy.setGravityY(1200);
                     }
                     else if (rN < levelStats.entityWeights.patrolEnemy) {
                         if (col > 0 && col < buildingWidth - 1) {
-                            var patrolEnemy = this.patrolEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32, "normalBaddie");
+                            var patrolEnemy = this.patrolEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32 - 15, "normalBaddie");
                             patrolEnemy.setGravityY(1200);
                         }
                     }
@@ -183,6 +186,8 @@ class Level extends Phaser.Scene {
             this.canClick = true;
         }
         
+        this.player.flipX = relClickX < this.player.x;
+        
         var garbageDump = this.garbageDump;
         this.projectiles.children.iterate(function(ball) {
             if (ball.x < 0 || ball.y < 0 || ball.y > 540 || ball.x > this.levelLength) {
@@ -199,9 +204,11 @@ class Level extends Phaser.Scene {
                     ball.doNotHurtEnemies = true;
                 }
             }
+            enemy.flipX = enemy.x > this.player.x;
         }.bind(this));
         this.patrolEnemies.children.iterate(function(enemy) {
             enemy.setVelocityX(Math.cos(this.internalClock / 16) * 96);
+            enemy.flipX = enemy.body.velocity.x < 0;
         }.bind(this));
         
         while (garbageDump.length > 0) {
