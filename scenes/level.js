@@ -104,6 +104,7 @@ class Level extends Phaser.Scene {
         this.player.setDragX(333);
         this.player.setDragY(333);
         this.physics.add.collider(this.player, this.bricks);
+        this.stunFrames = 0;
         
         this.physics.world.setBounds(0, 0, levelLength, 540);
         this.cameras.main.setBounds(0, 0, levelLength, 540);
@@ -136,10 +137,12 @@ class Level extends Phaser.Scene {
                 this.player.setVelocityX(projectile.body.velocity.x * 0.69);
                 this.player.setVelocityY(projectile.body.velocity.y * 0.69);
                 this.garbageDump.push(projectile);
+                this.stunFrames = 34;
             }
         }.bind(this), null, this);
         this.physics.add.overlap(this.patrolEnemies, this.player, function(player, enemy) {
             player.setVelocityX((enemy.body.velocity.x > 0)?1000:-1000);
+            this.stunFrames = 34;
         }.bind(this), null, this);
         
         this.physics.add.overlap(this.portal, this.player, function(player, portal) {
@@ -175,7 +178,7 @@ class Level extends Phaser.Scene {
         
         var relClickX = this.clicka.x + this.cameras.main.scrollX;
         
-        if (this.clicka.isDown && this.canClick && this.player.y > 21) {
+        if (this.clicka.isDown && this.canClick && this.player.y > 21 && this.stunFrames == 0) {
             this.canClick = false;
             var ball = this.projectiles.create(this.player.x, this.player.y, "ball");
             ball.rotation = Math.atan2(this.clicka.y - this.player.y, relClickX - this.player.x);
@@ -220,6 +223,8 @@ class Level extends Phaser.Scene {
         this.portal.rotation = this.internalClock / 9;
         
         if (this.player.y > 3690) this.scene.start("game-over");
+        
+        if (this.stunFrames > 0) this.stunFrames--;
     }
 
 }
