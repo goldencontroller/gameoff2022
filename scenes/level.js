@@ -76,8 +76,10 @@ class Level extends Phaser.Scene {
                 if (i > 0) {
                     var rN = Math.random();
                     if (rN < levelStats.entityWeights.sniperEnemy) {
-                        var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32 - 15, "normalBaddie");
-                        sniperEnemy.setGravityY(1200);
+                        if (i > 1) {
+                            var sniperEnemy = this.sniperEnemies.create((buildingStartPos + col) * 32, 540 - buildingHeight * 32 - 15, "normalBaddie");
+                            sniperEnemy.setGravityY(1200);
+                        }
                     }
                     else if (rN < levelStats.entityWeights.patrolEnemy) {
                         if (col > 0 && col < buildingWidth - 1) {
