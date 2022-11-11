@@ -134,15 +134,15 @@ class Level extends Phaser.Scene {
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.player, function(player, projectile) {
             if (projectile.doNotHurtEnemies) {
-                this.player.setVelocityX(projectile.body.velocity.x * 0.69);
-                this.player.setVelocityY(projectile.body.velocity.y * 0.69);
+                this.player.setVelocityX(projectile.body.velocity.x);
+                this.player.setVelocityY(projectile.body.velocity.y);
                 this.garbageDump.push(projectile);
-                this.stunFrames = 34;
+                //this.stunFrames = 34;
             }
         }.bind(this), null, this);
         this.physics.add.overlap(this.patrolEnemies, this.player, function(player, enemy) {
             player.setVelocityX((enemy.body.velocity.x > 0)?1000:-1000);
-            this.stunFrames = 34;
+            //this.stunFrames = 34;
         }.bind(this), null, this);
         
         this.physics.add.overlap(this.portal, this.player, function(player, portal) {
