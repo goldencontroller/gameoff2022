@@ -39,8 +39,8 @@ class Level extends Phaser.Scene {
                 levelStats.gapWidthDev = 2;
                 levelStats.stdBuildingHeight = 6;
                 levelStats.buildingHeightDev = 4;
-                levelStats.entityWeights.sniperEnemy = 0.27;
-                levelStats.entityWeights.patrolEnemy = 0.34;
+                levelStats.entityWeights.sniperEnemy = 0.34;
+                levelStats.entityWeights.patrolEnemy = 0.42;
                 graphics.fillGradientStyle(0xc23400, 0xc23400, 0xcaab3d, 0xcaab3d, 1);
                 break;
             case 3:
