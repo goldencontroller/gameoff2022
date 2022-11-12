@@ -23,7 +23,12 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
         this.okButton.setInteractive();
         this.okButton.on("pointerdown", function() {
             game.levelOn++;
-            this.scene.start("level");
+            switch (game.levelOn) {
+                case 3:
+                    this.scene.start("boss1");
+                default:
+                    this.scene.start("level");
+            }
         }.bind(this));
     }
 
