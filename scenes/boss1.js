@@ -78,6 +78,8 @@ class Boss1 extends Phaser.Scene {
         this.levelLength = levelLength;
         
         this.portal = this.physics.add.image(levelLength - (gapWidth + 2) * 32, 540 - (buildingHeight + 2) * 32, "portal");
+        this.portal.actualY = this.portal.y;
+        this.portal.setY(-6969);
         
         graphics.fillRect(0, 0, levelLength, 540);
         
@@ -218,6 +220,8 @@ class Boss1 extends Phaser.Scene {
         if (this.stunFrames > 0) this.stunFrames--;
         
         this.boss.flipX = this.boss.x > this.player.x;
+        
+        if (this.boss.y > 3690) this.portal.setY(this.portal.actualY);
     }
 
 }
