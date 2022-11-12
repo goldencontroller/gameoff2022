@@ -9,6 +9,7 @@ class Boss1 extends Phaser.Scene {
         this.load.image("ball", "assets/image/round.png");
         this.load.image("rakesh", "assets/image/rameshravi.png");
         this.load.image("normalBaddie", "assets/image/badbean.png");
+        this.load.image("srinath", "assets/image/srinath1.png");
 
     }
 
@@ -35,7 +36,7 @@ class Boss1 extends Phaser.Scene {
         this.patrolEnemies = this.physics.add.group();
         this.physics.add.collider(this.bricks, this.sniperEnemies);
         this.physics.add.collider(this.bricks, this.patrolEnemies);
-        this.boss = this.physics.add.sprite(0, 0, "normalBaddie");
+        this.boss = this.physics.add.sprite(0, 0, "srinath");
         this.physics.add.collider(this.bricks, this.boss);
         var buildingStartPos = 2;
         for (var i = 0; i < levelStats.numBuildings; i++) {
