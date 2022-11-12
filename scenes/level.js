@@ -9,7 +9,7 @@ class Level extends Phaser.Scene {
         this.load.image("ball", "assets/image/round.png");
         this.load.image("rakesh", "assets/image/rameshravi.png");
         this.load.image("normalBaddie", "assets/image/badbean.png");
-
+        this.load.image("portal", "assets/image/portal.png");
     }
 
     create() {

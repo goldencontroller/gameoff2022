@@ -10,7 +10,7 @@ class Boss1 extends Phaser.Scene {
         this.load.image("rakesh", "assets/image/rameshravi.png");
         this.load.image("normalBaddie", "assets/image/badbean.png");
         this.load.image("srinath", "assets/image/srinath1.png");
-
+        this.load.image("portal", "assets/image/portal.png");
     }
 
     create() {
