@@ -131,6 +131,15 @@ class Boss1 extends Phaser.Scene {
             this.scene.start("transition");
         }.bind(this), null, this);
         
+        this.physics.add.overlap(this.projectiles, this.boss, function(boss, projectile) {
+            if (!projectile.doNotHurtEnemies) {
+                projectile.doNotHurtEnemies = true;
+                projectile.rotation = Math.PI - projectile.rotation;
+                projectile.setVelocityX(Math.cos(projectile.rotation) * 1000);
+                projectile.setVelocityY(Math.sin(projectile.rotation) * 1000);
+            }
+        }.bind(this), null, this);
+        
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
         
         this.clicka = this.input.activePointer;
