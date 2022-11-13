@@ -6,7 +6,7 @@ var game = new Phaser.Game({
         default: "arcade",
         arcade: {
             gravity: { y: 0, x: 0 },
-            debug: false,
+            debug: true,
             fps: 60
         }
     },
@@ -14,7 +14,7 @@ var game = new Phaser.Game({
         target: 60,
         forceSetTimeOut: true
     },
-    scene: [Level, Transition, GameOver, Boss1],
+    scene: [StudioLogo, Level, Transition, GameOver, Boss1],
     pixelArt: true
 });
 
