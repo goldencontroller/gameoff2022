@@ -31,7 +31,7 @@ class StudioLogo extends Phaser.Scene {
             }
         }
         else {
-            this.scene.start("level");
+            this.scene.start("main-menu");
         }
     }
 
