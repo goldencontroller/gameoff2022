@@ -20,6 +20,11 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
                 lineSpacing: -5,
             }
         );
+        this.okButton = this.add.text(100, 500, "RETURN TO MAIN MENU");
+        this.okButton.setInteractive();
+        this.okButton.on("pointerdown", function() {
+            this.scene.start("main-menu");
+        }.bind(this));
     }
 
     update() {
