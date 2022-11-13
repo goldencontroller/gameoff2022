@@ -33,7 +33,7 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
     }
 
     update() {
-        
+        this.scene.stop("game-over"); // weird bug???
     }
 
 }
