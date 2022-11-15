@@ -233,6 +233,8 @@ class Boss1 extends Phaser.Scene {
                 ball.doNotHurtEnemies = true;
             }
         }
+        
+        this.scene.stop("main-menu");
     }
 
 }
