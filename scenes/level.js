@@ -156,6 +156,10 @@ class Level extends Phaser.Scene {
         
         this.internalClock = 0;
         
+        if (game.levelOn == 1) {
+            this.add.text(200, 200, "CLICK TO SHOOT.\n\nthat is all.");
+        }
+        
     }
 
     update() {
