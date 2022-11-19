@@ -9,6 +9,8 @@ class Transition extends Phaser.Scene {
     }
 
     create() {
+        this.sound.stopAll();
+        
         this.msg = this.add.text(100, 100, `CONGRATULATIONS
 PART ${Math.floor((game.levelOn - 1) / 3) + 1}${"abc".charAt((game.levelOn - 1) % 3)} COMPLETE
 

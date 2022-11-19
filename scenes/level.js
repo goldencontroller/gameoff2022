@@ -13,9 +13,12 @@ class Level extends Phaser.Scene {
         this.load.audio("shotSound", "assets/sound/muzzle.wav");
         this.load.audio("brickHit", "assets/sound/brickbreak.wav");
         this.load.audio("enemyKill", "assets/sound/enemydeath.wav");
+        this.load.audio("mainMusic", "assets/music/mainTheme.wav");
     }
 
     create() {
+        this.sound.stopAll();
+        
         var graphics = this.add.graphics();
         graphics.fillGradientStyle(0x00d8ff, 0x00d8ff, 0x003ebd, 0x003ebd, 1);
         
@@ -168,6 +171,10 @@ class Level extends Phaser.Scene {
         if (game.levelOn == 1) {
             this.add.text(200, 200, "CLICK TO SHOOT.\n\nthat is all.");
         }
+        
+        this.music = this.sound.add("mainMusic");
+        this.music.loop = true;
+        this.music.play();
         
     }
 

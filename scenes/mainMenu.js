@@ -9,6 +9,8 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        this.sound.stopAll();
+        
         this.playButton = this.add.text(480, 270, "NEW GAME");
         this.playButton.setInteractive();
         this.playButton.on("pointerdown", function() {

@@ -18,6 +18,8 @@ class Boss1 extends Phaser.Scene {
     }
 
     create() {
+        this.sound.stopAll();
+        
         var graphics = this.add.graphics();
         graphics.fillGradientStyle(0x00d8ff, 0x00d8ff, 0x003ebd, 0x003ebd, 1);
         
