@@ -26,6 +26,7 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
             switch (game.levelOn) {
                 case 3:
                     this.scene.start("boss1");
+                    break;
                 default:
                     this.scene.start("level");
             }
