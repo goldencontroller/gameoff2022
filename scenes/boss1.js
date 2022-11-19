@@ -11,6 +11,10 @@ class Boss1 extends Phaser.Scene {
         this.load.image("normalBaddie", "assets/image/badbean.png");
         this.load.image("srinath", "assets/image/srinath1.png");
         this.load.image("portal", "assets/image/portal.png");
+        this.load.audio("shotSound", "assets/sound/muzzle.wav");
+        this.load.audio("brickHit", "assets/sound/brickbreak.wav");
+        this.load.audio("enemyKill", "assets/sound/enemydeath.wav");
+        this.load.audio("shotDeflect", "assets/sound/metalbounce.wav");
     }
 
     create() {
@@ -102,12 +106,16 @@ class Boss1 extends Phaser.Scene {
             this.garbageDump.push(brick);
             this.garbageDump.push(projectile);
             if (!projectile.doNotHurtEnemies) game.scoreStats.propertyDamage += 690;
+            var sound = this.sound.add("brickHit");
+            sound.play();
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.sniperEnemies, function(projectile, enemy) {
             if (!projectile.doNotHurtEnemies) {
                 this.garbageDump.push(projectile);
                 this.garbageDump.push(enemy);
                 game.scoreStats.kills++;
+                var sound = this.sound.add("enemyKill");
+                sound.play();
             }
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.patrolEnemies, function(projectile, enemy) {
@@ -115,6 +123,8 @@ class Boss1 extends Phaser.Scene {
                 this.garbageDump.push(projectile);
                 this.garbageDump.push(enemy);
                 game.scoreStats.kills++;
+                var sound = this.sound.add("enemyKill");
+                sound.play();
             }
         }.bind(this), null, this);
         this.physics.add.overlap(this.projectiles, this.player, function(player, projectile) {
@@ -140,6 +150,8 @@ class Boss1 extends Phaser.Scene {
                 projectile.rotation = Math.PI - projectile.rotation;
                 projectile.setVelocityX(Math.cos(projectile.rotation) * 1000);
                 projectile.setVelocityY(Math.sin(projectile.rotation) * 1000);
+                var sound = this.sound.add("shotDeflect");
+                sound.play();
             }
         }.bind(this), null, this);
         
@@ -180,6 +192,8 @@ class Boss1 extends Phaser.Scene {
             ball.setVelocityY(Math.sin(ball.rotation) * 1000);
             this.player.setVelocityX(ball.body.velocity.x * -0.3);
             this.player.setVelocityY(ball.body.velocity.y * -0.3);
+            var sound = this.sound.add("shotSound");
+            sound.play();
         }
         else if (!this.clicka.isDown) {
             this.canClick = true;
@@ -201,6 +215,8 @@ class Boss1 extends Phaser.Scene {
                     ball.setVelocityX(Math.cos(ball.rotation) * 1000);
                     ball.setVelocityY(Math.sin(ball.rotation) * 1000);
                     ball.doNotHurtEnemies = true;
+                    var sound = this.sound.add("shotSound");
+                    sound.play();
                 }
             }
             enemy.flipX = enemy.x > this.player.x;
@@ -231,6 +247,8 @@ class Boss1 extends Phaser.Scene {
                 ball.setVelocityX(Math.cos(ball.rotation) * 1000);
                 ball.setVelocityY(Math.sin(ball.rotation) * 1000);
                 ball.doNotHurtEnemies = true;
+                var sound = this.sound.add("shotSound");
+                sound.play();
             }
         }
         
