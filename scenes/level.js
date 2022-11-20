@@ -176,6 +176,16 @@ class Level extends Phaser.Scene {
         this.music.loop = true;
         this.music.play();
         
+        if (game.levelOn < 7) {
+            for (var x = 0; x < levelLength; x++) {
+                if (Math.random() < 0.01) {
+                    var scale = Math.random() + 0.5;
+                    var cloud = this.add.ellipse(x, Math.random() * 100, 100 * scale, 50 * scale, 0xffffff);
+                    cloud.alpha = 0.2;
+                }
+            }
+        }
+        
     }
 
     update() {
