@@ -171,9 +171,9 @@ class Boss1 extends Phaser.Scene {
         
         if (game.levelOn < 7) {
             for (var x = 0; x < levelLength; x++) {
-                if (Math.random() < 0.01) {
+                if (Math.random() < 0.0069) {
                     var scale = Math.random() + 0.5;
-                    var cloud = this.add.ellipse(x, Math.random() * 100, 100 * scale, 50 * scale, 0xffffff);
+                    var cloud = this.add.ellipse(x, Math.random() * 100, 100 * scale, 36 * scale, 0xffffff);
                     cloud.alpha = 0.2;
                 }
             }
