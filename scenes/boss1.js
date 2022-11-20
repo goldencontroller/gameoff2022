@@ -15,6 +15,7 @@ class Boss1 extends Phaser.Scene {
         this.load.audio("brickHit", "assets/sound/brickbreak.wav");
         this.load.audio("enemyKill", "assets/sound/enemydeath.wav");
         this.load.audio("shotDeflect", "assets/sound/metalbounce.wav");
+        this.load.audio("bossMusic", "assets/music/srinathTheme.wav");
     }
 
     create() {
@@ -163,6 +164,10 @@ class Boss1 extends Phaser.Scene {
         this.canClick = false;
         
         this.internalClock = 0;
+        
+        this.music = this.sound.add("bossMusic");
+        this.music.loop = true;
+        this.music.play();
         
     }
 
