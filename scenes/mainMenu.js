@@ -21,7 +21,7 @@ class MainMenu extends Phaser.Scene {
                 propertyDamage: 0
             };
             
-            this.scene.start("level");
+            this.scene.start("cutscene");
             
         }.bind(this));
         
