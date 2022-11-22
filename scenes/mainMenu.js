@@ -11,7 +11,7 @@ class MainMenu extends Phaser.Scene {
     create() {
         this.sound.stopAll();
         
-        this.playButton = this.add.text(480, 270, "NEW GAME");
+        this.playButton = this.add.text(270, 270, "NEW GAME");
         this.playButton.setInteractive();
         this.playButton.on("pointerdown", function() {
 
@@ -24,6 +24,9 @@ class MainMenu extends Phaser.Scene {
             this.scene.start("level");
             
         }.bind(this));
+        
+        this.creditsButton = this.add.text(270, 300, "CREDITS");
+        this.creditsButton.setInteractive();
     }
 
     update() {
