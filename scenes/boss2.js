@@ -262,7 +262,7 @@ class Boss2 extends Phaser.Scene {
         if (this.bossAlive) {
             if (this.player.x < this.levelLength - 690) {
                 if (this.boss.x < this.player.x + 300) this.boss.x = this.player.x + 300;
-                this.boss.y = 100;
+                this.boss.y = 100 + 50 * Math.sin(this.internalClock / 69);
             }
             this.boss.flipX = true;
             this.boss.setTexture("srinathFlying", Math.floor(this.internalClock / 3) % 3);
