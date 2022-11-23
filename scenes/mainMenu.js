@@ -7,6 +7,7 @@ class MainMenu extends Phaser.Scene {
     preload() {
         this.load.image("bg", "assets/image/coverart.jpg");
         this.load.image("johnson", "assets/image/mainLogo.png");
+        this.load.audio("titleTheme", "assets/music/title.wav");
     }
 
     create() {
@@ -45,6 +46,10 @@ class MainMenu extends Phaser.Scene {
         }.bind(this));
         this.creditsButton.on("pointerover", function() { this.setColor("white"); });
         this.creditsButton.on("pointerout", function() { this.setColor("black"); });
+        
+        this.music = this.sound.add("titleTheme");
+        this.music.loop = true;
+        this.music.play();
     }
 
     update() {
