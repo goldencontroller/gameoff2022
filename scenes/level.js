@@ -14,6 +14,7 @@ class Level extends Phaser.Scene {
         this.load.audio("brickHit", "assets/sound/brickbreak.wav");
         this.load.audio("enemyKill", "assets/sound/enemydeath.wav");
         this.load.audio("mainMusic", "assets/music/mainTheme.wav");
+        this.load.image("stars", "assets/image/starPattern.png");
     }
 
     create() {
@@ -183,6 +184,16 @@ class Level extends Phaser.Scene {
                     var cloud = this.add.ellipse(x, Math.random() * 100, 100 * scale, 50 * scale, 0xffffff);
                     cloud.alpha = 0.2;
                 }
+            }
+        }
+        else {
+            for (var x = 0; x < levelLength + 1000; x += 960) {
+                var starry = this.add.image(x, 0, "stars");
+                starry.setOrigin(0, 0);
+                starry.setDepth(0);
+            }
+            for (var m of [this.player,this.bricks,this.sniperEnemies,this.patrolEnemies,this.portal]) {
+                m.setDepth(1);
             }
         }
         
