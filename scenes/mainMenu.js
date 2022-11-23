@@ -17,7 +17,8 @@ class MainMenu extends Phaser.Scene {
         this.logo = this.add.image(480, 96, "johnson");
         
         this.playButton = this.add.text(270, 270, "NEW GAME", {
-            color: "black"
+            color: "black",
+            fontSize: "24px"
         });
         this.playButton.setInteractive();
         this.playButton.on("pointerdown", function() {
@@ -35,7 +36,8 @@ class MainMenu extends Phaser.Scene {
         this.playButton.on("pointerout", function() { this.setColor("black"); });
         
         this.creditsButton = this.add.text(270, 300, "CREDITS", {
-            color: "black"
+            color: "black",
+            fontSize: "24px"
         });
         this.creditsButton.setInteractive();
         this.creditsButton.on("pointerover", function() { this.setColor("white"); });
