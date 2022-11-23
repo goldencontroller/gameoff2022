@@ -58,6 +58,29 @@ Good luck.
 
  - YOUR BOSS`);
                 break;
+            case 10:
+                this.okButton.on("pointerdown", function() {
+                    this.scene.start("main-menu");
+                }.bind(this));
+                this.okButton.setText("RETURN TO MAIN MENU");
+                this.msg.setText(`AGENT RAKESH:
+
+Congratulations! The mission was a success. You have defeated Srinath. Good work.
+
+I think you're a very hard-working and noble agent. Therefore, I trust you to know
+the real reason behind the mission.
+
+Srinath was trying to expose the internal corruption of our organization: the
+scandals committed by my boss. I sent you to fix the loose ends for me. I get to
+keep my job because of you. If word gets out, my boss will kill us both. That is,
+if I don't get to you first.
+
+Again, thanks so much for the help!
+
+Lots of love,
+
+ - YOUR BOSS`);
+                break;
         }
     }
 
