@@ -30,7 +30,7 @@ Your mission, if you choose to accept it:
 
 Hunt down the renegade Srinath, who threatens the security of our organization.
 
-If they succeeds, Srinath and his goons will disturb the current world order, ending
+If they succeed, Srinath and his goons will disturb the current world order, ending
 global civilization as we know it.
 
 You must find and destroy him before midnight.
