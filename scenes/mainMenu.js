@@ -40,6 +40,9 @@ class MainMenu extends Phaser.Scene {
             fontSize: "24px"
         });
         this.creditsButton.setInteractive();
+        this.creditsButton.on("pointerdown", function() {
+            this.scene.launch("credits");
+        }.bind(this));
         this.creditsButton.on("pointerover", function() { this.setColor("white"); });
         this.creditsButton.on("pointerout", function() { this.setColor("black"); });
     }
