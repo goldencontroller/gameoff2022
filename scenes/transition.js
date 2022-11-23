@@ -40,6 +40,8 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
                     break;
             }
         }.bind(this));
+        this.okButton.on("pointerover", function() { this.setColor("grey"); });
+        this.okButton.on("pointerout", function() { this.setColor("white"); });
     }
 
     update() {

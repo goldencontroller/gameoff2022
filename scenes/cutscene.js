@@ -18,6 +18,8 @@ class Cutscene extends Phaser.Scene {
         );
         this.okButton = this.add.text(100, 440, "CONTINUE");
         this.okButton.setInteractive();
+        this.okButton.on("pointerover", function() { this.setColor("grey"); });
+        this.okButton.on("pointerout", function() { this.setColor("white"); });
         
         switch (game.levelOn) {
             case 1:

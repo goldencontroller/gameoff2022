@@ -27,6 +27,8 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
         this.okButton.on("pointerdown", function() {
             this.scene.start("main-menu");
         }.bind(this));
+        this.okButton.on("pointerover", function() { this.setColor("grey"); });
+        this.okButton.on("pointerout", function() { this.setColor("white"); });
     }
 
     update() {

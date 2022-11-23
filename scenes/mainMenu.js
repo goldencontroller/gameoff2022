@@ -16,7 +16,9 @@ class MainMenu extends Phaser.Scene {
         
         this.logo = this.add.image(480, 96, "johnson");
         
-        this.playButton = this.add.text(270, 270, "NEW GAME");
+        this.playButton = this.add.text(270, 270, "NEW GAME", {
+            color: "black"
+        });
         this.playButton.setInteractive();
         this.playButton.on("pointerdown", function() {
 
@@ -29,9 +31,15 @@ class MainMenu extends Phaser.Scene {
             this.scene.start("cutscene");
             
         }.bind(this));
+        this.playButton.on("pointerover", function() { this.setColor("white"); });
+        this.playButton.on("pointerout", function() { this.setColor("black"); });
         
-        this.creditsButton = this.add.text(270, 300, "CREDITS");
+        this.creditsButton = this.add.text(270, 300, "CREDITS", {
+            color: "black"
+        });
         this.creditsButton.setInteractive();
+        this.creditsButton.on("pointerover", function() { this.setColor("white"); });
+        this.creditsButton.on("pointerout", function() { this.setColor("black"); });
     }
 
     update() {
