@@ -5,11 +5,16 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image("bg", "assets/image/coverart.jpg");
+        this.load.image("johnson", "assets/image/mainLogo.png");
     }
 
     create() {
         this.sound.stopAll();
+        
+        this.coverArt = this.add.image(480, 270, "bg");
+        
+        this.logo = this.add.image(480, 96, "johnson");
         
         this.playButton = this.add.text(270, 270, "NEW GAME");
         this.playButton.setInteractive();
