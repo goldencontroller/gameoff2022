@@ -21,7 +21,7 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
                 fontSize: 21
             }
         );
-        this.okButton = this.add.text(100, 500, "CONTINUE");
+        this.okButton = this.add.text(100, 440, "CONTINUE");
         this.okButton.setInteractive();
         this.okButton.on("pointerdown", function() {
             game.levelOn++;
