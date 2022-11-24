@@ -18,7 +18,7 @@ KILLS: ${game.scoreStats.kills}
 PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
 `,
             {
-                lineSpacing: -5,
+                fontSize: 21
             }
         );
         this.okButton = this.add.text(100, 500, "CONTINUE");
