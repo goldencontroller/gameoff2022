@@ -13,7 +13,7 @@ class Cutscene extends Phaser.Scene {
         
         this.msg = this.add.text(100, 100, "",
             {
-                lineSpacing: -5,
+                lineSpacing: -3,
             }
         );
         this.okButton = this.add.text(100, 440, "CONTINUE");
