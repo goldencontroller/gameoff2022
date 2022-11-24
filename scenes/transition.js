@@ -35,6 +35,9 @@ PROPERTY DAMAGE: $${game.scoreStats.propertyDamage}.00
                 case 6:
                     this.scene.start("boss2");
                     break;
+                case 7:
+                    this.scene.start("cutscene");
+                    break;
                 case 10:
                     this.scene.start("cutscene");
                     break;

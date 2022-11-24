@@ -58,6 +58,19 @@ Good luck.
 
  - YOUR BOSS`);
                 break;
+            case 7:
+                this.okButton.on("pointerdown", function() {
+                    this.scene.start("level");
+                }.bind(this));
+                this.msg.setText(`AGENT RAKESH:
+
+Good work. Srinath once again survived, but I feel that he is within our reach now.
+
+Also, I'm your daughter's guardian angel, so one more screwup and I off her. I'm not
+playing around.
+
+ - YOUR BOSS`);
+                break;
             case 10:
                 this.okButton.on("pointerdown", function() {
                     this.scene.start("main-menu");
