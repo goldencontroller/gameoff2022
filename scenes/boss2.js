@@ -16,6 +16,7 @@ class Boss2 extends Phaser.Scene {
         this.load.audio("enemyKill", "assets/sound/enemydeath.wav");
         this.load.audio("shotDeflect", "assets/sound/metalbounce.wav");
         this.load.audio("bossMusic", "assets/music/srinathTheme.wav");
+        this.load.audio("jetpackSound", "assets/sound/jetpack.wav");
     }
 
     create() {
@@ -266,6 +267,8 @@ class Boss2 extends Phaser.Scene {
             }
             this.boss.flipX = true;
             this.boss.setTexture("srinathFlying", Math.floor(this.internalClock / 3) % 3);
+            var sound = this.sound.add("jetpackSound");
+            sound.play();
         }
         else {
             this.boss.setTexture("srinathFlying", 3);
