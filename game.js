@@ -14,7 +14,7 @@ var game = new Phaser.Game({
         target: 60,
         forceSetTimeOut: true
     },
-    scene: [StudioLogo, Level, Boss1, Boss2, Transition, GameOver, MainMenu, Cutscene, Credits],
+    scene: [StudioLogo, Level, Boss1, Boss2, Boss3, Transition, GameOver, MainMenu, Cutscene, Credits],
     pixelArt: false
 });
 
