@@ -25,7 +25,7 @@ Graphics created by Yikuan Sun
 Sound effects created by Yikuan Sun
 Music written by Yikuan Sun
 Based on a story by Yikuan Sun
-The MAtri;x
+The MAtri;x is cool!1
 
 All characters and plots are fictional and do not relate to real people or events.`);
     }
