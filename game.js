@@ -15,7 +15,7 @@ var game = new Phaser.Game({
         forceSetTimeOut: true
     },
     scene: [StudioLogo, Level, Boss1, Boss2, Transition, GameOver, MainMenu, Cutscene, Credits],
-    pixelArt: true
+    pixelArt: false
 });
 
 game.levelOn = 1;
