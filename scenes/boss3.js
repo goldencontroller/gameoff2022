@@ -9,7 +9,7 @@ class Boss3 extends Phaser.Scene {
         this.load.image("ball", "assets/image/round.png");
         this.load.image("rakesh", "assets/image/rameshravi.png");
         this.load.image("normalBaddie", "assets/image/badbean.png");
-        this.load.spritesheet("srinathFlying", "assets/image/srinath2.png", { frameWidth: 40, frameHeight: 60 });
+        this.load.image("srinath", "assets/image/srinath1.png");
         this.load.image("portal", "assets/image/portal.png");
         this.load.audio("shotSound", "assets/sound/muzzle.wav");
         this.load.audio("brickHit", "assets/sound/brickbreak.wav");
@@ -44,14 +44,15 @@ class Boss3 extends Phaser.Scene {
         this.patrolEnemies = this.physics.add.group();
         this.physics.add.collider(this.bricks, this.sniperEnemies);
         this.physics.add.collider(this.bricks, this.patrolEnemies);
-        this.boss = this.physics.add.sprite(0, 0, "srinathFlying");
-        this.bossAlive = true;
-        //this.physics.add.collider(this.bricks, this.boss);
+        this.boss = this.physics.add.sprite(0, 0, "srinath");
+        this.physics.add.collider(this.bricks, this.boss);
         var buildingStartPos = 2;
         for (var i = 0; i < levelStats.numBuildings; i++) {
             var buildingWidth = levelStats.stdBuildingWidth + Math.round((2 * Math.random() - 1) * levelStats.buildingWidthDev);
             var buildingHeight = levelStats.stdBuildingHeight + Math.round((2 * Math.random() - 1) * levelStats.buildingHeightDev);
             var gapWidth = levelStats.stdGapWidth + Math.round((2 * Math.random() - 1) * levelStats.gapWidthDev);
+            
+            if (i == levelStats.numBuildings - 1) buildingHeight = 14;
             
             for (var col = 0; col < buildingWidth; col++) {
                 for (var row = 0; row < buildingHeight; row++) {
@@ -73,6 +74,12 @@ class Boss3 extends Phaser.Scene {
                         }
                     }
                 }
+            }
+                    
+            if (i == levelStats.numBuildings - 1) {
+                this.boss.setX((buildingStartPos + buildingWidth - 1) * 32);
+                this.boss.setY(540 - buildingHeight * 32 - 15);
+                this.boss.setGravityY(1200);
             }
             
             buildingStartPos += buildingWidth + gapWidth;
@@ -144,25 +151,13 @@ class Boss3 extends Phaser.Scene {
         
         this.physics.add.overlap(this.projectiles, this.boss, function(boss, projectile) {
             if (!projectile.doNotHurtEnemies) {
-                if (projectile.x > boss.x + 10) {
-                    this.bossAlive = false;
-                    this.garbageDump.push(projectile);
-                }
-                else {
-                    projectile.doNotHurtEnemies = true;
-                    projectile.rotation = Math.PI - projectile.rotation;
-                    projectile.setVelocityX(Math.cos(projectile.rotation) * 1000);
-                    projectile.setVelocityY(Math.sin(projectile.rotation) * 1000);
-                    var sound = this.sound.add("shotDeflect");
-                    sound.play();
-                }
+                projectile.doNotHurtEnemies = true;
+                projectile.rotation = Math.PI - projectile.rotation;
+                projectile.setVelocityX(Math.cos(projectile.rotation) * 1000);
+                projectile.setVelocityY(Math.sin(projectile.rotation) * 1000);
+                var sound = this.sound.add("shotDeflect");
+                sound.play();
             }
-        }.bind(this), null, this);
-        
-        this.physics.add.overlap(this.bricks, this.boss, function(boss, brick) {
-            this.garbageDump.push(brick);
-            var sound = this.sound.add("brickHit");
-            sound.play();
         }.bind(this), null, this);
         
         this.cursors = this.input.keyboard.createCursorKeys(); // for testing movement only
@@ -181,7 +176,7 @@ class Boss3 extends Phaser.Scene {
             starry.setOrigin(0, 0);
             starry.setDepth(0);
         }
-        for (var m of [this.player,this.bricks,this.sniperEnemies,this.patrolEnemies,this.portal]) {
+        for (var m of [this.player,this.bricks,this.sniperEnemies,this.patrolEnemies,this.portal, this.boss]) {
             m.setDepth(1);
         }
         
@@ -259,23 +254,12 @@ class Boss3 extends Phaser.Scene {
         
         if (this.stunFrames > 0) this.stunFrames--;
         
-        if (this.bossAlive) {
-            if (this.player.x < this.levelLength - 690) {
-                if (this.boss.x < this.player.x + 300) this.boss.x = this.player.x + 300;
-                this.boss.y = 100 + 50 * Math.sin(this.internalClock / 69);
-            }
-            this.boss.flipX = true;
-            this.boss.setTexture("srinathFlying", Math.floor(this.internalClock / 3) % 3);
-        }
-        else {
-            this.boss.setTexture("srinathFlying", 3);
-            this.boss.setGravityY(1200);
-        }
+        this.boss.flipX = this.boss.x > this.player.x;
         
         if (this.boss.y > 3690) this.portal.setY(this.portal.actualY);
         
-        if (this.boss.y < 3690) {
-            if (this.internalClock % 6 == 0 && Math.floor(this.internalClock / 180) % 4 == 3) {
+        if (Math.abs(this.boss.x - this.player.x) < 421 && this.boss.y < 3690) {
+            if (this.internalClock % 6 == 0 && Math.floor(this.internalClock / 100) % 2 == 0) {
                 var ball = this.projectiles.create(this.boss.x, this.boss.y, "ball");
                 ball.rotation = Math.atan2((this.player.y - 32) - this.boss.y, this.player.x - this.boss.x);
                 ball.setVelocityX(Math.cos(ball.rotation) * 1000);
