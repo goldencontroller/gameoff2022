@@ -1,0 +1,11 @@
+{
+    "name": "Rooftop Rakesh: Renegade",
+    "desc": "Roguelike action platformer",
+    "platforms": [
+        "linux",
+        "mac",
+        "windows"
+    ],
+    "version": "1.0.0",
+    "icon": "desktopIcon.png"
+}
