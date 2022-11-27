@@ -258,8 +258,8 @@ class Boss3 extends Phaser.Scene {
         
         if (this.boss.y > 3690) this.portal.setY(this.portal.actualY);
         
-        if (Math.abs(this.boss.x - this.player.x) < 421 && this.boss.y < 3690) {
-            if (this.internalClock % 6 == 0 && Math.floor(this.internalClock / 100) % 2 == 0) {
+        if (this.boss.y < 3690) {
+            if (this.internalClock % 6 == 0 && Math.floor(this.internalClock / 200) % 4 == 2) {
                 var ball = this.projectiles.create(this.boss.x, this.boss.y, "ball");
                 ball.rotation = Math.atan2((this.player.y - 32) - this.boss.y, this.player.x - this.boss.x);
                 ball.setVelocityX(Math.cos(ball.rotation) * 1000);
